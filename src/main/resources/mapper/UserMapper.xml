@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kaer.mapper.UserMapper">
+    <resultMap id="UserEntityMap" type="com.example.kaer.entity.User">
+        <id column="uid" property="uid"></id>
+        <result property="isDelete" column="is_delete"></result>
+    </resultMap>
+<!--     User findByUsername(String username); -->
+    <select id="findByUsername" resultMap="UserEntityMap">
+        select * from t_user where username = #{username}
+    </select>
+<!--   Integer insert(User user); -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="uid">
+        insert into t_user(username,password,salt,phone,email,gender,avatar,is_delete,code
+                           )values(#{username},#{password},#{salt},#{phone},#{email},#{gender},#{avatar},#{isDelete},#{code}
+               )
+    </insert>
+</mapper>
